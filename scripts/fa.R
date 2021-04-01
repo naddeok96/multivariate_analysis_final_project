@@ -6,9 +6,6 @@
 # Factor Analysis #
 #-----------------#
 
-# Imports
-library(corrplot)
-
 # Read in data
 data  = read.table("../data/plasma_data.txt", header=F)
 names = read.table("../data/plasma_variable_names.txt", header=F, stringsAsFactors=F)
