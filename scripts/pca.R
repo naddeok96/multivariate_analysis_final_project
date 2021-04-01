@@ -36,7 +36,7 @@ corrplot(cor(data), method="color", type = "upper", addCoef.col="black", outline
 # Scree Plot
 screeplot(data.pca, type="line", main="Scree Plot") 
 
-# Scatter of first two
+# Scatter of first two PC's
 plot(data.pca$x[, 1:2], pch=19)
 text(data.pca$x[, 1:2],labels=seq(length(data.pca$x[,1])), pos=3)
 
