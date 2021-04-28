@@ -19,7 +19,7 @@ names = read.table("../data/plasma_variable_names.txt", header=F, stringsAsFacto
 colnames(data) = names[1,]
 
 # Remove Noncontinuous variables
-data = data[, -which(names(data) %in% c("SEX", "SMOKESTAT", "VITUSE"))]
+data = data[, -which(names(data) %in% c("SEX", "SMOKSTAT", "VITUSE"))]
 
 # Get Individual datasets Function
 #------------------------------------------------------------------------------------------------------#
@@ -66,7 +66,7 @@ discrim_analysis = function(discrim_data){
 
 # Analysis
 # --------------------------------------------------------------------#
-min_num_bins = 2
+min_num_bins = 4
 max_num_bins = 50
 BETA_optimal_bin_acc = c(min_num_bins, 0, min_num_bins, 0)
 RET_optimal_bin_acc = c(min_num_bins, 0, min_num_bins, 0)
