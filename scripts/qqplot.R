@@ -33,13 +33,23 @@ d2 = diag(data.cen%*%solve(s)%*%t(data.cen))
 qchi = qchisq((1:sample_size - 0.5)/sample_size, df=feature_size)
 
 # Sorted d2 value
-sorted_d2 = sort(d2)
+sorted_d2 = sort(d2, index.return=TRUE)
 
 # Plot
-plot(qchi, sorted_d2, pch=19, xlab="Chi-2 Quantiles", 
+plot(qchi, sorted_d2$x, pch=19, xlab="Chi-2 Quantiles", 
      ylab="Mahalanobis squared distances", main="Chi-2 QQ Plot")
 
 # Mark the outliers
 num_outliers = 4
 points(qchi[(sample_size-num_outliers+1):sample_size], 
-       sorted_d2[(sample_size-num_outliers+1):sample_size], cex = 3,col='blue')
+       sorted_d2$x[(sample_size-num_outliers+1):sample_size], cex = 3,col='blue')
+
+
+print("Outlier Indicies")
+outliers = sorted_d2$ix[(sample_size-num_outliers+1):sample_size]
+reduced_data = data[-outliers, ]
+
+
+# Pairs
+pairs(reduced_data, pch=19, col = "#CC6600", lower.panel=NULL, font.labels = 3)
+
