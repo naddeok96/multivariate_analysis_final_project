@@ -15,7 +15,7 @@ names = read.table("../data/plasma_variable_names.txt", header=F, stringsAsFacto
 colnames(data) = names[1,]
 
 # Remove Noncontinuous variables
-data = data[, -which(names(data) %in% c("SEX", "SMOKESTAT", "VITUSE"))]
+data = data[, -which(names(data) %in% c("SEX", "SMOKSTAT", "VITUSE"))]
 
 # Standardize
 std.data = scale(data, center=T, scale=T)
