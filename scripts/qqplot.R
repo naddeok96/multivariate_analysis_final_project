@@ -1,0 +1,45 @@
+
+
+
+# Applied Multivariate Data Analysis
+# Final Project
+# Emrecan Ozdogan and Kyle Naddeo
+
+#---------------#
+# Chi-2 QQ plot #
+#---------------#
+
+# Read in data
+data  = read.table("../data/plasma_data.txt", header=F)
+names = read.table("../data/plasma_variable_names.txt", header=F, stringsAsFactors=F)
+colnames(data) = names[1,]
+
+# Remove Noncontinuous variables
+data = data[, -which(names(data) %in% c("SEX", "SMOKSTAT", "VITUSE", "BETAPLASMA", "RETPLASMA"))]
+
+# Dimensions
+feature_size = ncol(data)
+sample_size  = nrow(data)
+
+# Parameters
+s = cov(data)
+xbar = colMeans(data)
+
+# Manahalanobid Distance
+data.cen = scale(data, center=T, scale=T)
+d2 = diag(data.cen%*%solve(s)%*%t(data.cen))
+
+# Chi2 Quantiles
+qchi = qchisq((1:sample_size - 0.5)/sample_size, df=feature_size)
+
+# Sorted d2 value
+sorted_d2 = sort(d2)
+
+# Plot
+plot(qchi, sorted_d2, pch=19, xlab="Chi-2 Quantiles", 
+     ylab="Mahalanobis squared distances", main="Chi-2 QQ Plot")
+
+# Mark the outliers
+num_outliers = 4
+points(qchi[(sample_size-num_outliers+1):sample_size], 
+       sorted_d2[(sample_size-num_outliers+1):sample_size], cex = 3,col='blue')
