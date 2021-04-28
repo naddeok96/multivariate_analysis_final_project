@@ -53,3 +53,8 @@ reduced_data = data[-outliers, ]
 # Pairs
 pairs(reduced_data, pch=19, col = "#CC6600", lower.panel=NULL, font.labels = 3)
 
+# Correlation Plot
+corrplot(cor(reduced_data), method="color", type = "upper", addCoef.col="black", outline=F, diag=F, 
+         col=colorRampPalette(c("deepskyblue1","white","indianred3"))(200), 
+         tl.cex = 1, number.cex = 1,  cl.cex = 1,  tl.col = "black")
+
